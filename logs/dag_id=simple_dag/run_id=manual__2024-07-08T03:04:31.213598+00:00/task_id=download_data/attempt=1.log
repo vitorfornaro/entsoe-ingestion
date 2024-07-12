@@ -1,0 +1,58 @@
+[2024-07-08T03:04:31.999+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-07-08T03:04:32.009+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: simple_dag.download_data manual__2024-07-08T03:04:31.213598+00:00 [queued]>
+[2024-07-08T03:04:32.012+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: simple_dag.download_data manual__2024-07-08T03:04:31.213598+00:00 [queued]>
+[2024-07-08T03:04:32.013+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2024-07-08T03:04:32.017+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): download_data> on 2024-07-08 03:04:31.213598+00:00
+[2024-07-08T03:04:32.020+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61: DeprecationWarning: This process (pid=73) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-07-08T03:04:32.021+0000] {standard_task_runner.py:63} INFO - Started process 74 to run task
+[2024-07-08T03:04:32.021+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'simple_dag', 'download_data', 'manual__2024-07-08T03:04:31.213598+00:00', '--job-id', '17', '--raw', '--subdir', 'DAGS_FOLDER/simple_dag.py', '--cfg-path', '/tmp/tmpzli6l91m']
+[2024-07-08T03:04:32.021+0000] {standard_task_runner.py:91} INFO - Job 17: Subtask download_data
+[2024-07-08T03:04:32.027+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/settings.py:195: DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+  SQL_ALCHEMY_CONN = conf.get("database", "SQL_ALCHEMY_CONN")
+
+[2024-07-08T03:04:32.043+0000] {task_command.py:426} INFO - Running <TaskInstance: simple_dag.download_data manual__2024-07-08T03:04:31.213598+00:00 [running]> on host 5a5ecc196919
+[2024-07-08T03:04:32.077+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='simple_dag' AIRFLOW_CTX_TASK_ID='download_data' AIRFLOW_CTX_EXECUTION_DATE='2024-07-08T03:04:31.213598+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-07-08T03:04:31.213598+00:00'
+[2024-07-08T03:04:32.077+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-07-08T03:04:37.619+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-07-08T03:04:37.621+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/simple_dag.py", line 9, in download_data
+    response = requests.get(url)
+               ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/requests/sessions.py", line 725, in send
+    history = [resp for resp in gen]
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/requests/sessions.py", line 191, in resolve_redirects
+    raise TooManyRedirects(
+requests.exceptions.TooManyRedirects: Exceeded 30 redirects.
+[2024-07-08T03:04:37.633+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=simple_dag, task_id=download_data, run_id=manual__2024-07-08T03:04:31.213598+00:00, execution_date=20240708T030431, start_date=20240708T030432, end_date=20240708T030437
+[2024-07-08T03:04:37.640+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 17 for task download_data (Exceeded 30 redirects.; 74)
+[2024-07-08T03:04:37.665+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2024-07-08T03:04:37.674+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-07-08T03:04:37.675+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

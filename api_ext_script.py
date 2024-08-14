@@ -1,5 +1,5 @@
 import requests
-from datetime import datetime
+from datetime import datetime 
 
 # Defina as constantes e parâmetros da API
 API_KEY = '6b330f32-ab33-4f26-a38d-ce03e6fc5546'
@@ -15,7 +15,7 @@ def format_date(date):
 
 # Datas de início e fim para o dia 1 de julho de 2024
 start_date = datetime(2024, 7, 1, 0, 0)
-end_date = datetime(2024, 7, 2, 0, 0)
+end_date = datetime(2023, 8, 2, 0, 0)
 
 # Parâmetros da requisição
 params = {
